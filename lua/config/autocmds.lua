@@ -12,3 +12,13 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.diagnostic.enable(false, { bufnr = 0 })
   end,
 })
+
+-- run git clang-format on current file (only formats changed lines)
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = { "*.c", "*.cpp", "*.h", "*.hpp", "*.tpp" },
+  callback = function()
+    local file = vim.fn.expand("%:p")
+    vim.fn.system("git clang-format " .. file)
+    vim.cmd("edit") -- reload buffer to reflect changes
+  end,
+})
