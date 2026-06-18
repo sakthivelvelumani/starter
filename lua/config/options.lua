@@ -17,3 +17,7 @@ vim.g.clipboard = {
     ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
   },
 }
+vim.opt.clipboard = "" -- don't sync any register to system clipboard
+
+-- Disables automatically formatting entire file
+vim.g.autoformat = false
